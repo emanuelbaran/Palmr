@@ -16,7 +16,8 @@ npx prisma migrate deploy
 # Check if database is empty using Prisma
 USER_COUNT=$(node ./scripts/check-db.mjs)
 
-if [ "$USER_COUNT" -eq "0" ]; then
+if [ "$USER_COUNT" -eq 0 ] 2>/dev/null; then
+
     echo "Database is empty, running seeds..."
     pnpm db:seed
 else
