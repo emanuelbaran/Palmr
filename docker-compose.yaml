@@ -41,7 +41,7 @@ services:
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
-      - API_BASE_URL=http://palmr-api:${API_INTERNAL_PORT:-3333} # Here we use docker's internal network to reference the backend service (can be changed if needed)
+      - API_BASE_URL=${API_BASE_URL:-http://palmr-api:${API_INTERNAL_PORT:-3333}} # Here we use docker's internal network to reference the backend service (can be changed if needed)
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5487"]
@@ -56,7 +56,7 @@ services:
       # MinIO credentials - same as above, configurable through environment variables
       - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minio_root_user}
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioRootPassword}
-      - MINIO_SITE_REGION=sa-east-1
+      - MINIO_SITE_REGION=${MINIO_REGION:-eu-central-1}
     command: server /data --address ":${MINIO_INTERNAL_API_PORT:-6421}" --console-address ":${MINIO_INTERNAL_CONSOLE_PORT:-6422}"
     volumes:
       - minio_data:/data
