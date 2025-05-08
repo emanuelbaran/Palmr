@@ -29,8 +29,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-    labels:
-      - 'caddy_0.handle_path.0_reverse_proxy={{upstreams 3333}}}'
 
   palmr-app:
     image: kyantech/palmr-app:latest # Make sure to use the correct version (latest) of the image
@@ -50,8 +48,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    labels:
-      - 'caddy_0.handle_path.0_reverse_proxy={{upstreams 5487}}}'
 
   minio:
     image: minio/minio:RELEASE.2025-03-12T18-04-18Z # Use only version RELEASE.2025-03-12T18-04-18Z to avoid compatibility issues with the backend
